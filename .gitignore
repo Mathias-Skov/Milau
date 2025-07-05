@@ -50,3 +50,13 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+*.vsidx
+*.db-shm
+*.db-wal
+*.vsidx
+*.vsidx
+Milau/.vs/Milau/copilot-chat/2459af78/sessions/87f0c7f0-91a8-40f9-b3fd-419dd2845075
+Milau/.vs/Milau/FileContentIndex/27f9cc7c-74c5-46a8-8326-193adf3d7e86.vsidx
+Milau/.vs/Milau/FileContentIndex/d9e5559e-baee-42ee-908d-325993adbba7.vsidx
+Milau/.vs/Milau/FileContentIndex/e2018e8d-5dce-4a43-9954-9f082fd9bdb0.vsidx
+Milau/.vs/Milau/v17/.suo
