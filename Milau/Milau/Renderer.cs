@@ -22,6 +22,8 @@ namespace Milau
 
         // GUI elements
         private bool enableESP = true;
+        private bool drawLines = false;
+
         private Vector4 enemyColor = new Vector4(1, 0, 0, 1); // RGBA format for red color
         private Vector4 teamColor = new Vector4(0, 0, 1, 1); // RGBA format for blue color
 
@@ -37,6 +39,7 @@ namespace Milau
 
             // ESP part
             ImGui.Checkbox("Enable ESP", ref enableESP);
+            ImGui.Checkbox("Draw lines", ref drawLines);
 
             // Enemy color
             if (ImGui.CollapsingHeader("Enemey color"))
@@ -58,7 +61,8 @@ namespace Milau
                     if (EntityOnScreen(entity))
                     {
                         DrawBox(entity);
-                        DrawLine(entity);
+                        if (drawLines)
+                            DrawLine(entity);
                     }
                 }
             }
@@ -127,7 +131,7 @@ namespace Milau
                 | ImGuiWindowFlags.NoCollapse
                 | ImGuiWindowFlags.NoScrollbar
                 | ImGuiWindowFlags.NoScrollWithMouse
-                );
+            );
         }
     }
 }

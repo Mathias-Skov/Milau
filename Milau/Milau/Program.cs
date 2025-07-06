@@ -42,6 +42,8 @@ namespace Milau
                 int m_hPlayerPawn = 0x824;
                 int m_vecViewOffset = 0xCB0;
 
+                Console.WriteLine("Milau loaded successfully!");
+
                 // ESP loop
                 while (true)
                 {
