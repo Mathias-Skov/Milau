@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ClickableTransparentOverlay;
 using ImGuiNET;
+using Milau.Models;
 
 namespace Milau
 {
