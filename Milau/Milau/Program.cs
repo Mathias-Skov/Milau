@@ -13,7 +13,7 @@ namespace Milau
 
         static async Task Login()
         {
-            Authorization auth = new Authorization("Abc", "Abc");
+            Authorization auth = new Authorization("1234", "1234");
             bool isValid = await auth.Login();
 
             if (isValid)
@@ -26,7 +26,7 @@ namespace Milau
             }
             else
             {
-                Console.WriteLine("False!");
+                return;
             }
         }
 

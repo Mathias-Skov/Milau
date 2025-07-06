@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using ClickableTransparentOverlay;
@@ -34,6 +35,7 @@ namespace Milau
 
         protected override void Render()
         {
+
             // Draw our GUI
             ImGui.Begin("Milau");
             ImGui.Text("A CS2 cheat");

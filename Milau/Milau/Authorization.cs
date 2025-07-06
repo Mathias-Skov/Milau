@@ -28,25 +28,30 @@ namespace Milau
             };
 
             var httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("https://jsonplaceholder.typicode.com/");
 
             var json = JsonSerializer.Serialize(postData);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await httpClient.PostAsync("posts", content);
+            var response = await httpClient.PostAsync("http://localhost:5160/api/v1/auth", content);
 
             if (response.IsSuccessStatusCode)
             {
                 var responseData = await response.Content.ReadAsStringAsync();
-                var postResponse = JsonSerializer.Deserialize<UserDetails>(responseData);
+                var postResponse = JsonSerializer.Deserialize<AuthResponse>(responseData);
 
-                Console.WriteLine($"License: {postResponse?.License}\n" +
-                    $"HWID: {postResponse?.Hwid}\n");
+                Console.WriteLine($"License: {postResponse?.User?.License}\n" +
+                    $"HWID: {postResponse?.User?.Hwid}\n");
+
                 return true;
             }
             else
             {
-                Console.WriteLine("Error: " + response.StatusCode);
+                var responseData = await response.Content.ReadAsStringAsync();
+                var postResponse = JsonSerializer.Deserialize<AuthResponse>(responseData);
+
+                Console.WriteLine($"{postResponse?.Message}:\n" +
+                    $"License: {postResponse?.User?.License}\n" +
+                    $"HWID: {postResponse?.User?.Hwid}\n");
                 return false;
             }
         }
