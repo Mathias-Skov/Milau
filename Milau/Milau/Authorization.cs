@@ -20,38 +20,47 @@ namespace Milau
 
         public async Task<bool> Login()
         {
-            var postData = new UserDetails
+            try
             {
-                Id = "1",
-                License = License,
-                Hwid = Hwid
-            };
+                var postData = new UserDetails
+                {
+                    Id = "1",
+                    License = License,
+                    Hwid = Hwid
+                };
 
-            var httpClient = new HttpClient();
+                var httpClient = new HttpClient();
 
-            var json = JsonSerializer.Serialize(postData);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var json = JsonSerializer.Serialize(postData);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await httpClient.PostAsync("http://localhost:5160/api/v1/auth", content);
+                var response = await httpClient.PostAsync("http://localhost:5160/api/v1/auth", content);
 
-            if (response.IsSuccessStatusCode)
-            {
-                var responseData = await response.Content.ReadAsStringAsync();
-                var postResponse = JsonSerializer.Deserialize<AuthResponse>(responseData);
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+                    var postResponse = JsonSerializer.Deserialize<AuthResponse>(responseData);
 
-                Console.WriteLine($"License: {postResponse?.User?.License}\n" +
-                    $"HWID: {postResponse?.User?.Hwid}\n");
+                    Console.WriteLine($"License: {postResponse?.User?.License}\n" +
+                        $"HWID: {postResponse?.User?.Hwid}\n");
 
-                return true;
+                    return true;
+                }
+                else
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+                    var postResponse = JsonSerializer.Deserialize<AuthResponse>(responseData);
+
+                    Console.WriteLine($"{postResponse?.Message}:\n" +
+                        $"License: {postResponse?.User?.License}\n" +
+                        $"HWID: {postResponse?.User?.Hwid}\n");
+                    return false;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                var responseData = await response.Content.ReadAsStringAsync();
-                var postResponse = JsonSerializer.Deserialize<AuthResponse>(responseData);
-
-                Console.WriteLine($"{postResponse?.Message}:\n" +
-                    $"License: {postResponse?.User?.License}\n" +
-                    $"HWID: {postResponse?.User?.Hwid}\n");
+                Console.WriteLine($"Our services are currently down. Try again later!");
+                Console.ReadLine();
                 return false;
             }
         }
