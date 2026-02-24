@@ -45,4 +45,4 @@ The project has been experimented with in two approaches:
 - Windows API via P/Invoke
 
 ## Link for GitHub repository for the web API
-https://github.com/Mathias-Skov/Milau_Web
+https://github.com/Mathias-Skov/Milau_API
